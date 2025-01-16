@@ -35,7 +35,7 @@ public class Test9 {
         // 3.Define a variable to count how many times the sum is subtracted.
         int count = 0;
         // 4. Loop while
-        // In the loop, keep using the divisor - divisor
+        // In the loop, keep using the dividend - divisor
         // As long as the dividend is greater than or equal to the divisor, the loop continues.
         while(dividend >= divisor){
             dividend = dividend - divisor;

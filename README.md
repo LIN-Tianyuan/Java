@@ -22,6 +22,7 @@ JDK (Java Development Kit) called Java Development Tools, including the JRE and 
  - Comments, Keywords, Literals, Variables, Data Types, Identifiers, Keyboard Entry
  - double > float > long > int > short > byte
 ```java
+// Keypad entry
 import java.util.Scanner;
 public class ScannerDemo1{
 	public static void main(String[] args){
@@ -34,3 +35,17 @@ public class ScannerDemo1{
 ```
  - Operator
  - Statement(if, switch, for, while, do...while)
+```java
+// Random number
+public class Test4 {
+    public static void main(String[] args) {
+        
+        Random r = new Random();
+        
+        for (int i = 0; i < 100; i++) {
+            int number = r.nextInt(10);// 0 ~ 9
+            System.out.println(number);
+        }
+    }
+}
+```
