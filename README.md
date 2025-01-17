@@ -36,6 +36,7 @@ public class ScannerDemo1{
  - Operator
  - Statement(if, switch, for, while, do...while)
 ```java
+import java.util.Random;
 // Random number
 public class Test4 {
     public static void main(String[] args) {
