@@ -1,4 +1,12 @@
 # Java
+```bash
+D1 -> HelloWorld
+D2 -> Variable
+D3 -> If/While/For
+D4 -> Array
+D5 -> Method
+D6 -> Java Basic Test
+```
 ## Java Basics
  - javac + filename + suffix (that is, compile the java file)
  - java + filename (to run the compiled class file)
@@ -50,3 +58,5 @@ public class Test4 {
     }
 }
 ```
+ - Array
+ - Method
