@@ -60,3 +60,8 @@ public class Test4 {
 ```
  - Array
  - Method
+## Object-oriented
+ - Classes and Objects
+ - Member and local variables
+ - Encapsulation(private, this)
+ - Constructor method
