@@ -6,6 +6,8 @@ D3 -> If/While/For
 D4 -> Array
 D5 -> Method
 D6 -> Java Basic Test
+D7 -> Object-oriented
+D8 -> Object-oriented Test
 ```
 ## Java Basics
  - javac + filename + suffix (that is, compile the java file)
