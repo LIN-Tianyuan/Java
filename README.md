@@ -8,6 +8,7 @@ D5 -> Method
 D6 -> Java Basic Test
 D7 -> Object-oriented
 D8 -> Object-oriented Test
+D9 -> String
 ```
 ## Java Basics
  - javac + filename + suffix (that is, compile the java file)
@@ -67,3 +68,7 @@ public class Test4 {
  - Member and local variables
  - Encapsulation(private, this)
  - Constructor method
+## String
+ - String
+ - StringBuilder
+ - StringJoiner
