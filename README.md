@@ -9,6 +9,7 @@ D6 -> Java Basic Test
 D7 -> Object-oriented
 D8 -> Object-oriented Test
 D9 -> String
+D10 -> ArrayList
 ```
 ## Java Basics
  - javac + filename + suffix (that is, compile the java file)
@@ -72,3 +73,4 @@ public class Test4 {
  - String
  - StringBuilder
  - StringJoiner
+## ArrayList
