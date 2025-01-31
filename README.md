@@ -81,4 +81,7 @@ public class Test4 {
  - Add pictures
  - Disrupt pictures
  - Beautify the interface
- - 
+ - Move pictures
+ - View Full Image
+ - Cheat code
+ - Judgment victory

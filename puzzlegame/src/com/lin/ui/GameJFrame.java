@@ -18,6 +18,16 @@ public class GameJFrame extends JFrame implements KeyListener {
     int[][] data = new int[4][4];
     // Record the position of the blank squares in the two-dimensional array
     int x = 0, y = 0;
+    String path = "puzzlegame\\image\\animal\\animal3\\";
+
+    // Define a two-dimensional array to store the correct data
+    int[][] win = {
+            {1, 2, 3, 4},
+            {5, 6, 7, 8},
+            {9, 10, 11, 12},
+            {13, 14, 15, 0}
+    };
+
     // Main screen of the game
     public GameJFrame() {
         // Initialization
@@ -52,11 +62,11 @@ public class GameJFrame extends JFrame implements KeyListener {
 
         // 4. Add data to a two-dimensional array
         for (int i = 0; i < tempArr.length; i++) {
-            if(tempArr[i] == 0) {
+            if (tempArr[i] == 0) {
                 x = i / 4;
                 y = i % 4;
-            }else{
-                data[i/4][i%4] = tempArr[i];
+            } else {
+                data[i / 4][i % 4] = tempArr[i];
             }
         }
     }
@@ -66,6 +76,12 @@ public class GameJFrame extends JFrame implements KeyListener {
     private void initImage() {
         // Empty all images that were already there
         this.getContentPane().removeAll();
+        if (victory()) {
+            // Show victory icon
+            JLabel winJLabel = new JLabel(new ImageIcon("puzzlegame\\image\\win.png"));
+            winJLabel.setBounds(203, 283, 197, 73);
+            this.getContentPane().add(winJLabel);
+        }
         // Detail:
         // Images loaded first are at the top and images loaded later are at the bottom.
         // Outer loop: The inner loop is repeated 4 times
@@ -75,7 +91,7 @@ public class GameJFrame extends JFrame implements KeyListener {
                 // Get the current serial number of the image to be loaded
                 int number = data[i][j];
                 // Create an object with an ImageIcon
-                ImageIcon icon = new ImageIcon("puzzlegame\\image\\animal\\animal3\\"+ number +".jpg");
+                ImageIcon icon = new ImageIcon(path + number + ".jpg");
                 // Create a JLabel object (management container)
                 JLabel jLabel = new JLabel(icon);
                 // Specify image position
@@ -152,13 +168,34 @@ public class GameJFrame extends JFrame implements KeyListener {
 
     }
 
+    // This method is called when the button is pressed and not released.
     @Override
     public void keyPressed(KeyEvent e) {
-
+        int code = e.getKeyCode();
+        if (code == 65) {
+            // Delete all the images in the interface
+            this.getContentPane().removeAll();
+            // Load the first full image
+            JLabel all = new JLabel(new ImageIcon(path + "all.jpg"));
+            all.setBounds(83, 134, 420, 420);
+            this.getContentPane().add(all);
+            // Load background photo
+            JLabel background = new JLabel(new ImageIcon("puzzlegame\\image\\background.png"));
+            background.setBounds(40, 40, 508, 560);
+            this.getContentPane().add(background);
+            // Refresh screen
+            this.getContentPane().repaint();
+        }
     }
 
     @Override
     public void keyReleased(KeyEvent e) {
+        // Determine if the game is won, if it is, this method needs to end directly and can no longer execute the following action code
+        if (victory()) {
+            // 1. Return results
+            // 2. End method
+            return;
+        }
         // Make judgments about up and down, left and right
         // Left:37 Up:38 Right:39 Down:40
         int code = e.getKeyCode();
@@ -202,6 +239,32 @@ public class GameJFrame extends JFrame implements KeyListener {
             x--;
             // Call the method to load the image according to the latest number
             initImage();
+        } else if (code == 65) {
+            initImage();
+        } else if (code == 87) {
+            data = new int[][]{
+                    {1, 2, 3, 4},
+                    {5, 6, 7, 8},
+                    {9, 10, 11, 12},
+                    {13, 14, 15, 0}
+            };
+            initImage();
         }
+    }
+
+    // Determine whether the data in the data array is the same as that in the win array, if all are the same, return true, otherwise return false.
+    public boolean victory() {
+        for (int i = 0; i < data.length; i++) {
+            // i: The indexes inside the two-dimensional array data are represented in order.
+            // data[i]: Represent each one-dimensional array in turn
+            for (int j = 0; j < data[i].length; j++) {
+                if (data[i][j] != win[i][j]) {
+                    // As long as one of the data is not the same, return false
+                    return false;
+                }
+
+            }
+        }
+        return true;
     }
 }
