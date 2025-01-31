@@ -80,3 +80,5 @@ public class Test4 {
  - Menu construction
  - Add pictures
  - Disrupt pictures
+ - Beautify the interface
+ - 

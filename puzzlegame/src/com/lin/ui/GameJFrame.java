@@ -1,6 +1,7 @@
 package com.lin.ui;
 
 import javax.swing.*;
+import javax.swing.border.BevelBorder;
 import java.util.Random;
 
 /**
@@ -54,6 +55,8 @@ public class GameJFrame extends JFrame {
     // Init image
     // When adding images, we need to add images according to the data managed in the two-dimensional array
     private void initImage() {
+        // Detail:
+        // Images loaded first are at the top and images loaded later are at the bottom.
         // Outer loop: The inner loop is repeated 4 times
         for (int i = 0; i < 4; i++) {
             // Inner loop: Add 4 images in a row
@@ -61,17 +64,26 @@ public class GameJFrame extends JFrame {
                 // Get the current serial number of the image to be loaded
                 int number = data[i][j];
                 // Create an object with an ImageIcon
-                ImageIcon icon = new ImageIcon("D:\\Alex\\Info\\Project\\Java\\puzzlegame\\image\\animal\\animal3\\"+ number +".jpg");
+                ImageIcon icon = new ImageIcon("puzzlegame\\image\\animal\\animal3\\"+ number +".jpg");
                 // Create a JLabel object (management container)
                 JLabel jLabel = new JLabel(icon);
                 // Specify image position
-                jLabel.setBounds(105 * j, 105 * i, 105, 105);
+                jLabel.setBounds(105 * j + 83, 105 * i + 134, 105, 105);
+                // Add Borders to Images
+                // 0: Indicates that the picture is made to bulge
+                // 1: Indicates to make the picture concave
+                jLabel.setBorder(new BevelBorder(BevelBorder.LOWERED));
                 // Add the management container to the interface
                 this.getContentPane().add(jLabel);
                 // After adding once, number needs to be incremented to indicate that the next time the next image is loaded.
                 number++;
             }
         }
+        // Add background photo
+        JLabel background = new JLabel(new ImageIcon("puzzlegame\\image\\background.png"));
+        background.setBounds(40, 40, 508, 560);
+        // Add a background image to the interface
+        this.getContentPane().add(background);
 
     }
 
