@@ -1,6 +1,7 @@
 package com.lin.ui;
 
 import javax.swing.*;
+import java.util.Random;
 
 /**
  * @author ：lin
@@ -9,25 +10,56 @@ import javax.swing.*;
  * @version: 1.0
  */
 public class GameJFrame extends JFrame {
+    // Create a two-dimensional array
+    // Purpose: to manage data
+    int[][] data = new int[4][4];
     // Main screen of the game
     public GameJFrame() {
         // Initialization
         initJFrame();
         // Init menu
         initJMenuBar();
-        // Init image
+        // Initialize data (disrupt)
+        initData();
+        // Init image (Load the image based on the result of the disruption)
         initImage();
         // Show
         this.setVisible(true);
     }
 
+    // Initialize data (disrupt)
+    private void initData() {
+        // 1. Define a one-dimensional array
+        int[] tempArr = {0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15};
+        // 2. Reverse the order of the data in the array
+        // Iterate through the array, get each element, take the data on the root random index of each element and swap it out
+        Random r = new Random();
+        for (int i = 0; i < tempArr.length; i++) {
+            // Get the random index
+            int index = r.nextInt(tempArr.length);
+            // Take each piece of data traversed and swap it with the data on a random index
+            int temp = tempArr[i];
+            tempArr[i] = tempArr[index];
+            tempArr[index] = temp;
+        }
+
+        System.out.println();
+
+        // 4. Add data to a two-dimensional array
+        for (int i = 0; i < tempArr.length; i++) {
+            data[i/4][i%4] = tempArr[i];
+        }
+    }
+
     // Init image
+    // When adding images, we need to add images according to the data managed in the two-dimensional array
     private void initImage() {
-        int number = 1;
         // Outer loop: The inner loop is repeated 4 times
         for (int i = 0; i < 4; i++) {
             // Inner loop: Add 4 images in a row
             for (int j = 0; j < 4; j++) {
+                // Get the current serial number of the image to be loaded
+                int number = data[i][j];
                 // Create an object with an ImageIcon
                 ImageIcon icon = new ImageIcon("D:\\Alex\\Info\\Project\\Java\\puzzlegame\\image\\animal\\animal3\\"+ number +".jpg");
                 // Create a JLabel object (management container)
