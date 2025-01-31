@@ -15,8 +15,32 @@ public class GameJFrame extends JFrame {
         initJFrame();
         // Init menu
         initJMenuBar();
+        // Init image
+        initImage();
         // Show
         this.setVisible(true);
+    }
+
+    // Init image
+    private void initImage() {
+        int number = 1;
+        // Outer loop: The inner loop is repeated 4 times
+        for (int i = 0; i < 4; i++) {
+            // Inner loop: Add 4 images in a row
+            for (int j = 0; j < 4; j++) {
+                // Create an object with an ImageIcon
+                ImageIcon icon = new ImageIcon("D:\\Alex\\Info\\Project\\Java\\puzzlegame\\image\\animal\\animal3\\"+ number +".jpg");
+                // Create a JLabel object (management container)
+                JLabel jLabel = new JLabel(icon);
+                // Specify image position
+                jLabel.setBounds(105 * j, 105 * i, 105, 105);
+                // Add the management container to the interface
+                this.getContentPane().add(jLabel);
+                // After adding once, number needs to be incremented to indicate that the next time the next image is loaded.
+                number++;
+            }
+        }
+
     }
 
     private void initJMenuBar() {
@@ -58,5 +82,8 @@ public class GameJFrame extends JFrame {
         this.setLocationRelativeTo(null);
         // Set close mode
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        // Uncheck the default centering, only then will the components be added according to the XY axis
+        this.setLayout(null);
     }
 }

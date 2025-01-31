@@ -77,5 +77,5 @@ public class Test4 {
 
 ## Puzzle Game
  - Interface construction
- - Menu Construction
- - 
+ - Menu construction
+ - Add pictures
