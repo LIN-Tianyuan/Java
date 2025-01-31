@@ -34,6 +34,9 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
     int step = 0;
 
     // Create an entry object under Options
+    JMenuItem girl = new JMenuItem("Girl");
+    JMenuItem animal = new JMenuItem("Animal");
+    JMenuItem sport = new JMenuItem("Sport");
     JMenuItem replayItem = new JMenuItem("Replay");
     JMenuItem reLoginItem = new JMenuItem("ReLogin");
     JMenuItem exitItem = new JMenuItem("Exit");
@@ -139,8 +142,14 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
         JMenu functionJMenu = new JMenu("Function");
         JMenu aboutJMenu = new JMenu("About Us");
 
+        // Create Replacement Images
+        JMenu changeImage = new JMenu("Change Image");
 
         // Add the entries below each option to the options
+        changeImage.add(girl);
+        changeImage.add(animal);
+        changeImage.add(sport);
+        functionJMenu.add(changeImage);
         functionJMenu.add(replayItem);
         functionJMenu.add(reLoginItem);
         functionJMenu.add(exitItem);
@@ -152,6 +161,9 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
         reLoginItem.addActionListener(this);
         exitItem.addActionListener(this);
         aboutItem.addActionListener(this);
+        girl.addActionListener(this);
+        animal.addActionListener(this);
+        sport.addActionListener(this);
 
         // Add two options to the menu.
         jmenuBar.add(functionJMenu);
@@ -292,6 +304,7 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
     public void actionPerformed(ActionEvent e) {
         // Get the currently clicked entry object
         Object obj = e.getSource();
+        Random r = new Random();
         // Judge
         if (obj == replayItem) {
             // Zero the pedometer
@@ -327,6 +340,33 @@ public class GameJFrame extends JFrame implements KeyListener, ActionListener {
             jDialog.setModal(true);
             // Show box
             jDialog.setVisible(true);
+        } else if (obj == girl) {
+            int number = r.nextInt(13) + 1;
+            path = "puzzlegame\\image\\girl\\girl"+ number +"\\";
+            // Zero the pedometer
+            step = 0;
+            // Break up the data in the two-dimensional array again
+            initData();
+            // Reload the image
+            initImage();
+        } else if (obj == animal) {
+            int number = r.nextInt(8) + 1;
+            path = "puzzlegame\\image\\animal\\animal"+ number +"\\";
+            // Zero the pedometer
+            step = 0;
+            // Break up the data in the two-dimensional array again
+            initData();
+            // Reload the image
+            initImage();
+        } else if (obj == sport) {
+            int number = r.nextInt(10) + 1;
+            path = "puzzlegame\\image\\sport\\sport"+ number +"\\";
+            // Zero the pedometer
+            step = 0;
+            // Break up the data in the two-dimensional array again
+            initData();
+            // Reload the image
+            initImage();
         }
     }
 }

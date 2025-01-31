@@ -87,3 +87,8 @@ public class Test4 {
  - Judgment victory
  - Calculate steps
  - Menu business implementation
+ - Toggle game image
+## Game packaged as an exe
+ - Pack all the code into a zip archive with a jar extension
+ - Convert jar package to exe installation package
+ - Integrate the exe, image, and JDK from step 2 into the final exe installation package
