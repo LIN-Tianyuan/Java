@@ -2,6 +2,8 @@ package com.lin.ui;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.Random;
@@ -12,7 +14,7 @@ import java.util.Random;
  * @description ：Game
  * @version: 1.0
  */
-public class GameJFrame extends JFrame implements KeyListener {
+public class GameJFrame extends JFrame implements KeyListener, ActionListener {
     // Create a two-dimensional array
     // Purpose: to manage data
     int[][] data = new int[4][4];
@@ -27,6 +29,16 @@ public class GameJFrame extends JFrame implements KeyListener {
             {9, 10, 11, 12},
             {13, 14, 15, 0}
     };
+
+    // Define variables to count steps
+    int step = 0;
+
+    // Create an entry object under Options
+    JMenuItem replayItem = new JMenuItem("Replay");
+    JMenuItem reLoginItem = new JMenuItem("ReLogin");
+    JMenuItem exitItem = new JMenuItem("Exit");
+
+    JMenuItem aboutItem = new JMenuItem("About");
 
     // Main screen of the game
     public GameJFrame() {
@@ -65,9 +77,8 @@ public class GameJFrame extends JFrame implements KeyListener {
             if (tempArr[i] == 0) {
                 x = i / 4;
                 y = i % 4;
-            } else {
-                data[i / 4][i % 4] = tempArr[i];
             }
+            data[i / 4][i % 4] = tempArr[i];
         }
     }
 
@@ -82,6 +93,10 @@ public class GameJFrame extends JFrame implements KeyListener {
             winJLabel.setBounds(203, 283, 197, 73);
             this.getContentPane().add(winJLabel);
         }
+
+        JLabel stepCount = new JLabel("Step: " + step);
+        stepCount.setBounds(50, 30, 100, 20);
+        this.getContentPane().add(stepCount);
         // Detail:
         // Images loaded first are at the top and images loaded later are at the bottom.
         // Outer loop: The inner loop is repeated 4 times
@@ -123,12 +138,7 @@ public class GameJFrame extends JFrame implements KeyListener {
         // Create objects for the two options above the menu (Functions About Us)
         JMenu functionJMenu = new JMenu("Function");
         JMenu aboutJMenu = new JMenu("About Us");
-        // Create an entry object under Options
-        JMenuItem replayItem = new JMenuItem("Replay");
-        JMenuItem reLoginItem = new JMenuItem("ReLogin");
-        JMenuItem exitItem = new JMenuItem("Exit");
 
-        JMenuItem aboutItem = new JMenuItem("About");
 
         // Add the entries below each option to the options
         functionJMenu.add(replayItem);
@@ -136,6 +146,12 @@ public class GameJFrame extends JFrame implements KeyListener {
         functionJMenu.add(exitItem);
 
         aboutJMenu.add(aboutItem);
+
+        // Bind events to entries
+        replayItem.addActionListener(this);
+        reLoginItem.addActionListener(this);
+        exitItem.addActionListener(this);
+        aboutItem.addActionListener(this);
 
         // Add two options to the menu.
         jmenuBar.add(functionJMenu);
@@ -206,6 +222,7 @@ public class GameJFrame extends JFrame implements KeyListener {
             data[x][y] = data[x][y + 1];
             data[x][y + 1] = 0;
             y++;
+            step++;
             // Call the method to load the image according to the latest number
             initImage();
         } else if (code == 38) {
@@ -219,6 +236,7 @@ public class GameJFrame extends JFrame implements KeyListener {
             data[x][y] = data[x + 1][y];
             data[x + 1][y] = 0;
             x++;
+            step++;
             // Call the method to load the image according to the latest number
             initImage();
         } else if (code == 39) {
@@ -228,6 +246,7 @@ public class GameJFrame extends JFrame implements KeyListener {
             data[x][y] = data[x][y - 1];
             data[x][y - 1] = 0;
             y--;
+            step++;
             // Call the method to load the image according to the latest number
             initImage();
         } else if (code == 40) {
@@ -237,6 +256,7 @@ public class GameJFrame extends JFrame implements KeyListener {
             data[x][y] = data[x - 1][y];
             data[x - 1][y] = 0;
             x--;
+            step++;
             // Call the method to load the image according to the latest number
             initImage();
         } else if (code == 65) {
@@ -266,5 +286,47 @@ public class GameJFrame extends JFrame implements KeyListener {
             }
         }
         return true;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        // Get the currently clicked entry object
+        Object obj = e.getSource();
+        // Judge
+        if (obj == replayItem) {
+            // Zero the pedometer
+            step = 0;
+            // Break up the data in the two-dimensional array again
+            initData();
+            // Reload the image
+            initImage();
+        } else if (obj == reLoginItem) {
+            // Close the current game screen
+            this.setVisible(false);
+            // Open the login screen
+            new LoginJFrame();
+        } else if (obj == exitItem) {
+            // Simply shut down the virtual machine
+            System.exit(0);
+        } else if (obj == aboutItem) {
+            // Create a popup box object
+            JDialog jDialog = new JDialog();
+            // Create a container object JLabel for managing images
+            JLabel jLabel = new JLabel(new ImageIcon("puzzlegame\\image\\about.jpeg"));
+            // Set position
+            jLabel.setBounds(0, 0, 500, 634);
+            // Add images to the popup box
+            jDialog.getContentPane().add(jLabel);
+            // Set box size
+            jDialog.setSize(500, 634);
+            // Make the popup box top
+            jDialog.setAlwaysOnTop(true);
+            // Center the popup box
+            jDialog.setLocationRelativeTo(null);
+            // The following screens cannot be operated without closing the pop-up box
+            jDialog.setModal(true);
+            // Show box
+            jDialog.setVisible(true);
+        }
     }
 }

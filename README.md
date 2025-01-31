@@ -85,3 +85,5 @@ public class Test4 {
  - View Full Image
  - Cheat code
  - Judgment victory
+ - Calculate steps
+ - Menu business implementation
